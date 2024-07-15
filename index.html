@@ -111,7 +111,8 @@
               while (qrCodeResult.firstChild) {
                 qrCodeResult.firstChild.remove();
               }
-              qrCodeResult.appendChild(image);
+              document.getElementById("qrcode-result-text").innerText = url;
+              // qrCodeResult.appendChild(image);
               document.getElementById("result-card").style.display = "block";
             });
           };
@@ -137,8 +138,9 @@
       <div class="card" id="result-card">
         <figure id="qrcode-result"></figure>
         <div class="card-body">
+          <span id="qrcode-result-text"></span>
           <h2 class="card-title">支付宝缴费</h2>
-          <p>使用快捷指令添加到主屏幕</p>
+          <p>使用快捷指令添加到主屏幕，具体参考github</p>
         </div>
       </div>
       <a class="link" href="https://github.com/robbietree8/park-qrcode-gen">Github</a>
