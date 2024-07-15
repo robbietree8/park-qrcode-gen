@@ -7,10 +7,11 @@
 
 ## 解决方案
 
-将二维码连同支付 app 做成桌面快捷方式
+将二维码连同支付 app 做成桌面快捷方式，具体可参考[IOS生成快捷方式之扫描指定二维码]
 
 ![demo](demo.jpg)
 
 ## 参考
 
 - [IOS生成快捷方式扫描指定二维码的URL生成方式](https://zhuanlan.zhihu.com/p/438481277)
+- [IOS生成快捷方式之扫描指定二维码](https://zhuanlan.zhihu.com/p/438476512)
