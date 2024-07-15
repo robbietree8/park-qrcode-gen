@@ -9,6 +9,8 @@
 
 将二维码连同支付 app 做成桌面快捷方式
 
+![demo](demo.jpg)
+
 ## 参考
 
 - [IOS生成快捷方式扫描指定二维码的URL生成方式](https://zhuanlan.zhihu.com/p/438481277)
