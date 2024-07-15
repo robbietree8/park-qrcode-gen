@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>停车场二维码快捷方式</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css"
+    />
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+        background-color: #1f1f1f;
+        background-image: linear-gradient(45deg, #0f0f0f 25%, transparent 25%),
+          linear-gradient(-45deg, #0f0f0f 25%, transparent 25%),
+          linear-gradient(45deg, transparent 75%, #0f0f0f 75%),
+          linear-gradient(-45deg, transparent 75%, #0f0f0f 75%);
+        background-size: 20px 20px;
+        background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 400px;
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #212121;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        border: 1px solid #333333;
+      }
+      .container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.02) 0%,
+          rgba(255, 255, 255, 0.05) 100%
+        );
+        pointer-events: none;
+      }
+      h1 {
+        font-size: 24px;
+        margin: 0 0 20px;
+        color: #cccccc;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+      #qrcode-upload {
+        display: none;
+      }
+      .upload-btn {
+        margin-top: 10px;
+      }
+      .upload-btn input[type="file"] {
+        opacity: 0;
+        width: 0.1px;
+        height: 0.1px;
+        position: absolute;
+      }
+      .upload-btn label {
+        display: inline-block;
+        padding: 15px 20px;
+        background-color: #444444;
+        color: #ffffff;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .upload-btn label:hover {
+        background-color: #555555;
+      }
+      .card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+      .card img {
+        max-width: 100%;
+        height: auto;
+      }
+      #result-card {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tc-qrcode/tc-qrcode.min.js"></script>
+    <script type="module">
+      const alipayScanUrl =
+        "alipayqr://platformapi/startapp?saId=10000007&qrcode=";
+      const qrCodeResult = document.getElementById("qrcode-result");
+
+      document
+        .getElementById("qrcode-upload")
+        .addEventListener("change", function (e) {
+          const file = e.target.files[0];
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const imageData = e.target.result;
+            TCQrcode.decodeFromBase64(imageData).then((result) => {
+              const url = alipayScanUrl + encodeURI(result);
+              const image = TCQrcode.encodeAsImage(url);
+              while (qrCodeResult.firstChild) {
+                qrCodeResult.firstChild.remove();
+              }
+              qrCodeResult.appendChild(image);
+              document.getElementById("result-card").style.display = "block";
+            });
+          };
+          reader.readAsDataURL(file);
+        });
+    </script>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>停车场二维码快捷方式</h1>
+      <div class="upload-btn">
+        <label for="qrcode-upload" class="btn">Upload QR Code</label>
+        <input type="file" id="qrcode-upload" accept="image/*" />
+      </div>
+      <div class="card" id="result-card">
+        <figure id="qrcode-result"></figure>
+        <div class="card-body">
+          <h2 class="card-title">支付宝</h2>
+          <p>手机扫码后保存链接到桌面</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
