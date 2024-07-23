@@ -91,11 +91,11 @@
         display: none;
       }
       .container img {
-        width: 100%;
+        width: 80%;
         height: 200px;
       }
       .container li {
-        margin: 0 10px;
+        margin: 10px 10px;
         padding: 0;
       }
     </style>
@@ -136,6 +136,23 @@
               alert("复制成功");
             });
         });
+      window.addEventListener('DOMContentLoaded', function() {
+        const stepsList = document.querySelector('.steps');
+        
+        function handleResize() {
+          if (window.innerWidth < 768) {
+            stepsList.classList.add('steps-vertical');
+          } else {
+            stepsList.classList.remove('steps-vertical');
+          }
+        }
+
+        // Initial check on page load
+        handleResize();
+
+        // Listen for window resize events
+        window.addEventListener('resize', handleResize);
+      });
     </script>
     <script type="text/javascript">
       (function(c,l,a,r,i,t,y){
@@ -162,7 +179,7 @@
       </div>
       <div>
         <h1>使用步骤</h1>
-        <ul class="steps steps-vertical lg:steps-horizontal">
+        <ul class="steps">
           <li class="step">
             <img src="./assets/step-1.jpg" />
           </li>
