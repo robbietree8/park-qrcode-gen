@@ -90,6 +90,14 @@
       #result-card {
         display: none;
       }
+      .container img {
+        width: 100%;
+        height: 200px;
+      }
+      .container li {
+        margin: 0 10px;
+        padding: 0;
+      }
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/tc-qrcode/tc-qrcode.min.js"></script>
@@ -118,6 +126,16 @@
           };
           reader.readAsDataURL(file);
         });
+
+      document
+        .getElementById("copy-btn")
+        .addEventListener("click", function () {
+          navigator.clipboard
+            .writeText(document.getElementById("qrcode-result-text").innerText)
+            .then(() => {
+              alert("复制成功");
+            });
+        });
     </script>
     <script type="text/javascript">
       (function(c,l,a,r,i,t,y){
@@ -139,9 +157,34 @@
         <figure id="qrcode-result"></figure>
         <div class="card-body">
           <span id="qrcode-result-text"></span>
-          <h2 class="card-title">支付宝缴费</h2>
-          <p>使用快捷指令添加到主屏幕，具体参考github</p>
+          <button id="copy-btn" class="btn btn-accent">复制到剪贴板</button>
         </div>
+      </div>
+      <div>
+        <h1>使用步骤</h1>
+        <ul class="steps">
+          <li class="step">
+            <img src="./assets/step-1.jpg" />
+          </li>
+          <li class="step">
+            <img src="./assets/step-2.jpg" />
+          </li>
+          <li class="step">
+            <img src="./assets/step-3.jpg" />
+          </li>
+          <li class="step">
+            <img src="./assets/step-4.jpg" />
+          </li>
+          <li class="step">
+            <img src="./assets/step-5.jpg" />
+          </li>
+          <li class="step">
+            <img src="./assets/step-6.jpg" />
+          </li>
+          <li class="step">
+            <img src="./assets/step-7.jpg" />
+          </li>
+        </ul>
       </div>
       <a class="link" href="https://github.com/robbietree8/park-qrcode-gen">Github</a>
     </div>
