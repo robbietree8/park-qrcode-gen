@@ -115,7 +115,7 @@
           const reader = new FileReader();
           reader.onload = function (e) {
             const imageData = e.target.result;
-            console.log("imageData:", imageData);
+            console.log("imageData:", imageData.substring(0, 20));
             TCQrcode.decodeFromBase64(imageData).then((result) => {
               console.log("result:", result);
               const url = alipayScanUrl + encodeURI(result);
