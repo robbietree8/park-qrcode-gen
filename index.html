@@ -101,10 +101,12 @@
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/tc-qrcode/tc-qrcode.min.js"></script>
+    <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
     <script type="module">
       const alipayScanUrl =
         "alipayqr://platformapi/startapp?saId=10000007&qrcode=";
       const qrCodeResult = document.getElementById("qrcode-result");
+      var vConsole = new window.VConsole();
 
       document
         .getElementById("qrcode-upload")
@@ -113,7 +115,9 @@
           const reader = new FileReader();
           reader.onload = function (e) {
             const imageData = e.target.result;
+            console.log("imageData:", imageData);
             TCQrcode.decodeFromBase64(imageData).then((result) => {
+              console.log("result:", result);
               const url = alipayScanUrl + encodeURI(result);
               const image = TCQrcode.encodeAsImage(url);
               while (qrCodeResult.firstChild) {
