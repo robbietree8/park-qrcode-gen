@@ -111,6 +111,7 @@
       document
         .getElementById("qrcode-upload")
         .addEventListener("change", function (e) {
+          document.getElementById("loadingSpan").style.display = "block";
           const file = e.target.files[0];
           const formData = new FormData();
           formData.append("file", file);
@@ -121,6 +122,7 @@
           })
             .then((response) => response.json())
             .then((data) => {
+              document.getElementById("loadingSpan").style.display = "none";
               const result = data[0].symbol[0].data;
               const url = alipayScanUrl + encodeURIComponent(result);
               while (qrCodeResult.firstChild) {
@@ -172,6 +174,7 @@
         <label for="qrcode-upload" class="btn">上传停车场缴费二维码</label>
         <input type="file" id="qrcode-upload" accept="image/*" />
       </div>
+      <span id="loadingSpan" class="loading loading-spinner loading-lg" style="display: none;"></span>
       <div class="card" id="result-card">
         <figure id="qrcode-result"></figure>
         <div class="card-body">
