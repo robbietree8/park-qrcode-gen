@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-theme="coffee">
   <head>
     <title>IOS-停车场二维码快捷指令</title>
     <meta charset="UTF-8" />
@@ -114,8 +114,8 @@
           document.getElementById("loadingSpan").style.display = "block";
           const file = e.target.files[0];
           const formData = new FormData();
-          formData.append("file", file);
           formData.append("MAX_FILE_SIZE", 1048576);
+          formData.append("file", file);
           fetch("https://api.qrserver.com/v1/read-qr-code/", {
             body: formData,
             method: "POST",
@@ -178,7 +178,7 @@
       <div class="card" id="result-card">
         <figure id="qrcode-result"></figure>
         <div class="card-body">
-          <span id="qrcode-result-text"></span>
+          <pre id="qrcode-result-text"></pre>
           <button id="copy-btn" class="btn btn-accent">复制到剪贴板</button>
         </div>
       </div>
