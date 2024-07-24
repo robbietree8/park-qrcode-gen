@@ -10,6 +10,10 @@
 
 ![demo](demo.png)
 
+## 第三方API
+
+[QR Code Generator](https://goqr.me/api/)
+
 ## 参考
 
 - [IOS生成快捷方式扫描指定二维码的URL生成方式](https://zhuanlan.zhihu.com/p/438481277)
