@@ -103,19 +103,18 @@
       }
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tc-qrcode/tc-qrcode.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/tc-qrcode/tc-qrcode.min.js"></script> -->
     <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
     <script type="module">
       const alipayScanUrl =
         "alipayqr://platformapi/startapp?saId=10000007&qrcode=";
-      var vConsole = new window.VConsole();
+      // var vConsole = new window.VConsole();
 
       document
         .getElementById("qrcode-upload")
         .addEventListener("change", function (e) {
           document.getElementById("loadingSpan").style.display = "block";
           const file = e.target.files[0];
-          console.log("file", file);
           const formData = new FormData();
           formData.append("MAX_FILE_SIZE", 1048576);
           formData.append("file", file);
