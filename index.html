@@ -115,7 +115,7 @@
           const formData = new FormData();
           formData.append("file", file);
           formData.append("MAX_FILE_SIZE", 1048576);
-          fetch("http://api.qrserver.com/v1/read-qr-code/", {
+          fetch("https://api.qrserver.com/v1/read-qr-code/", {
             body: formData,
             method: "POST",
           })
