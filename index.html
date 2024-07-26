@@ -105,32 +105,36 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/tc-qrcode/tc-qrcode.min.js"></script> -->
     <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/image-blob-reduce@4.1.0/dist/image-blob-reduce.min.js"></script>
     <script type="module">
       const alipayScanUrl =
         "alipayqr://platformapi/startapp?saId=10000007&qrcode=";
-      // var vConsole = new window.VConsole();
+      var vConsole = new window.VConsole();
+      const reducer = new ImageBlobReduce();
 
       document
         .getElementById("qrcode-upload")
         .addEventListener("change", function (e) {
           document.getElementById("loadingSpan").style.display = "block";
           const file = e.target.files[0];
-          const formData = new FormData();
-          formData.append("MAX_FILE_SIZE", 1048576);
-          formData.append("file", file);
-          fetch("https://api.qrserver.com/v1/read-qr-code/", {
-            body: formData,
-            method: "POST",
+          reducer.toBlob(file, {max: 1024}).then(function (blob) {
+            const formData = new FormData();
+            formData.append("MAX_FILE_SIZE", 1048576);
+            formData.append("file", blob);
+            fetch("https://api.qrserver.com/v1/read-qr-code/", {
+              body: formData,
+              method: "POST",
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                document.getElementById("loadingSpan").style.display = "none";
+                const result = data[0].symbol[0].data;
+                const url = alipayScanUrl + encodeURIComponent(result);
+                document.getElementById("qrcode-result-text").innerText = url;
+                document.getElementById("result-card").style.display = "block";
+  
+              });
           })
-            .then((response) => response.json())
-            .then((data) => {
-              document.getElementById("loadingSpan").style.display = "none";
-              const result = data[0].symbol[0].data;
-              const url = alipayScanUrl + encodeURIComponent(result);
-              document.getElementById("qrcode-result-text").innerText = url;
-              document.getElementById("result-card").style.display = "block";
-
-            });
         });
 
       document
@@ -196,12 +200,6 @@
           </li>
           <li class="step">
             <img src="./assets/step-5.jpg" />
-          </li>
-          <li class="step">
-            <img src="./assets/step-6.jpg" />
-          </li>
-          <li class="step">
-            <img src="./assets/step-7.jpg" />
           </li>
         </ul>
       </div>
