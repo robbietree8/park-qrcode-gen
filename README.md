@@ -12,8 +12,8 @@
 
 ## 第三方API
 
-- [QR Code Generator](https://goqr.me/api/)
-- [image-blob-reduce](https://github.com/nodeca/image-blob-reduce)
+- [读取二维码内容](https://goqr.me/api/)
+- [图片压缩](https://github.com/nodeca/image-blob-reduce)
 
 ## 参考
 
