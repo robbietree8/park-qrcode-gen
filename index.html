@@ -114,6 +114,9 @@
         .getElementById("qrcode-upload")
         .addEventListener("change", function (e) {
           document.getElementById("loadingSpan").style.display = "block";
+          document.getElementById("error-msg-id").parentNode.style.display = "none";
+          document.getElementById("result-card").style.display = "none";
+          
           const file = e.target.files[0];
           reducer.toBlob(file, {max: 1024}).then(function (blob) {
             const formData = new FormData();
@@ -126,6 +129,11 @@
               .then((response) => response.json())
               .then((data) => {
                 document.getElementById("loadingSpan").style.display = "none";
+                if(data[0].symbol[0].error) {
+                  document.getElementById("error-msg-id").parentNode.style.display = "block";
+                  document.getElementById("error-msg-id").innerText = data[0].symbol[0].error;
+                  return;
+                }
                 const result = data[0].symbol[0].data;
                 const url = alipayScanUrl + encodeURIComponent(result);
                 document.getElementById("qrcode-result-text").innerText = url;
@@ -180,6 +188,9 @@
           <p id="qrcode-result-text"></p>
           <button id="copy-btn" class="btn btn-accent">复制到剪贴板</button>
         </div>
+      </div>
+      <div class="alert alert-error" style="display: none;">
+        <span id="error-msg-id"></span>
       </div>
       <div>
         <h1>使用步骤</h1>
