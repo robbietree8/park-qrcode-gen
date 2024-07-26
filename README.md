@@ -10,6 +10,11 @@
 
 ![demo](demo.png)
 
+## 访问地址
+
+- [vercel](https://park-qrcode-gen.vercel.app/)
+- [cf pages](https://park-qrcode-gen.pages.dev/)
+
 ## 第三方API
 
 - [读取二维码内容](https://goqr.me/api/)
