@@ -17,7 +17,8 @@
 
 ## 第三方API
 
-- [读取二维码内容](https://goqr.me/api/)
+- ~~[读取二维码内容](https://goqr.me/api/)~~
+- [读取二维码内容](jsQR)
 - [图片压缩](https://github.com/nodeca/image-blob-reduce)
 
 ## 参考
